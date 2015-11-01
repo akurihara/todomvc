@@ -13,6 +13,7 @@
     "url": "https://github.com/akurihara/todomvc.git"
   },
   "dependencies": {
+    "classnames": "~2.2.0",
     "react": "~0.14.1",
     "react-dom": "~0.14.1",
     "react-redux": "~4.0.0",

@@ -4,7 +4,7 @@ import classnames from 'classnames';
 class Todo extends Component {
 
   render() {
-    const { todo, completeTodo } = this.props;
+    const { todo, completeTodo, deleteTodo } = this.props;
     let classes = classnames({
       completed: todo.completed
     });
@@ -17,7 +17,7 @@ class Todo extends Component {
                  checked={todo.completed}
                  onChange={() => completeTodo(todo.id)}/>
           <label>{todo.text}</label>
-          <button className="destroy" />
+          <button className="destroy" onClick={() => deleteTodo(todo.id)} />
         </div>
       </li>
     );

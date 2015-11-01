@@ -1,4 +1,5 @@
 const ADD_TODO = 'todomvc/todos/ADD_TODO';
+const DELETE_TODO = 'todomvc/todos/DELETE_TODO';
 const COMPLETE_TODO = 'todomvc/todos/COMPLETE_TODO';
 
 const initialState = [{
@@ -15,6 +16,8 @@ export default function todos(state = initialState, action) {
         text: action.text,
         completed: false  
       }];
+    case DELETE_TODO:
+      return state.filter(todo => todo.id !== action.id)
     case COMPLETE_TODO:
       return state.map(todo =>
         todo.id === action.id ?
@@ -28,6 +31,10 @@ export default function todos(state = initialState, action) {
 
 export function addTodo(text) {
   return { type: ADD_TODO, text }
+}
+
+export function deleteTodo(id) {
+  return { type: DELETE_TODO, id }
 }
 
 export function completeTodo(id) {

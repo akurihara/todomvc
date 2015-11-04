@@ -11,11 +11,24 @@ class App extends Component {
 
   render() {
     const { todos, todosActions, visibilityFilterActions, filter } = this.props;
+    const completedCount = todos.reduce(
+      (count, todo) => todo.completed ? count + 1 : count,
+      0
+    );
+    const activeCount = todos.length - completedCount;
+
     return (
       <div>
         <Header addTodo={todosActions.addTodo} />
-        <MainSection todos={todos} actions={todosActions} filter={filter} />
-        <Footer onFilterChange={visibilityFilterActions.setVisibilityFilter} filter={filter} />
+        <MainSection
+          todos={todos}
+          actions={todosActions}
+          completedCount={completedCount}
+          filter={filter} />
+        <Footer
+          onFilterChange={visibilityFilterActions.setVisibilityFilter}
+          filter={filter}
+          activeCount={activeCount} />
       </div>
     );
   }

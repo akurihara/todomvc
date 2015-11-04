@@ -18,12 +18,16 @@ class MainSection extends Component {
   }
 
   render() {
-    const { todos, filter } = this.props;
+    const { todos, filter, completedCount, actions } = this.props;
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
+    const isToggleAllChecked = todos.length === completedCount;
 
     return (
       <section className="main">
-        <input className="toggle-all" type="checkbox" />
+        <input className="toggle-all"
+               type="checkbox"
+               checked={isToggleAllChecked}
+               onChange={actions.toggleAll} />
         <label htmlFor="toggle-all">Mark all as complete</label>
         <ul className="todo-list">
           {filteredTodos.map(this.renderTodo.bind(this))}
@@ -35,6 +39,7 @@ class MainSection extends Component {
 
 MainSection.propTypes = {
   actions: PropTypes.object.isRequired,
+  completedCount: PropTypes.number.isRequired,
   filter: PropTypes.oneOf([
     VisibilityFilters.SHOW_ALL,
     VisibilityFilters.SHOW_COMPLETED,

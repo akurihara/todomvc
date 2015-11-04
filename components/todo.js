@@ -13,9 +13,9 @@ class Todo extends Component {
       <li className={classes} >
         <div className="view">
           <input className="toggle"
-                 type="checkbox"
-                 checked={todo.completed}
-                 onChange={() => completeTodo(todo.id)}/>
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => completeTodo(todo.id)}/>
           <label>{todo.text}</label>
           <button className="destroy" onClick={() => deleteTodo(todo.id)} />
         </div>

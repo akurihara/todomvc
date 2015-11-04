@@ -12,7 +12,8 @@ class Footer extends Component {
 
   renderFilter(filter) {
     const { onFilterChange } = this.props;
-    let classes = classnames({ selected: filter === this.props.filter });
+    const classes = classnames({ selected: filter === this.props.filter });
+
     return (
       <li key={filter}>
         <a className={classes} href="#" onClick={() => onFilterChange(filter)}>
@@ -23,11 +24,14 @@ class Footer extends Component {
   }
 
   render() {
+    const { activeCount } = this.props;
     const { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } = VisibilityFilters;
+    const itemWord = activeCount == 1 ? 'item' : 'items';
+
     return (
       <footer className="footer">
         <span className="todo-count">
-          <strong>0</strong> items left
+          <strong>{activeCount}</strong> {itemWord} left
         </span>
 				<ul className="filters">
           {[ SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE ].map(this.renderFilter.bind(this))}
@@ -39,6 +43,7 @@ class Footer extends Component {
 
 Footer.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
+  activeCount: PropTypes.number.isRequired,
   filter: PropTypes.oneOf([
     VisibilityFilters.SHOW_ALL,
     VisibilityFilters.SHOW_COMPLETED,

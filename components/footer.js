@@ -23,6 +23,17 @@ class Footer extends Component {
     );
   }
 
+  renderClearCompletedButton() {
+    const { completedCount, onClearCompleted } = this.props;
+    if ( completedCount > 0 ) {
+      return (
+        <button className="clear-completed" onClick={onClearCompleted}>
+          Clear completed
+        </button>
+      );
+    }
+  }
+
   render() {
     const { activeCount } = this.props;
     const { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } = VisibilityFilters;
@@ -36,6 +47,7 @@ class Footer extends Component {
 				<ul className="filters">
           {[ SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE ].map(this.renderFilter.bind(this))}
 				</ul>
+        {this.renderClearCompletedButton()}
       </footer>
     );
   }
@@ -43,7 +55,9 @@ class Footer extends Component {
 
 Footer.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
+  onClearCompleted: PropTypes.func.isRequired,
   activeCount: PropTypes.number.isRequired,
+  completedCount: PropTypes.number.isRequired,
   filter: PropTypes.oneOf([
     VisibilityFilters.SHOW_ALL,
     VisibilityFilters.SHOW_COMPLETED,

@@ -28,7 +28,9 @@ class App extends Component {
         <Footer
           onFilterChange={visibilityFilterActions.setVisibilityFilter}
           filter={filter}
-          activeCount={activeCount} />
+          activeCount={activeCount}
+          completedCount={completedCount}
+          onClearCompleted={todosActions.clearCompleted} />
       </div>
     );
   }

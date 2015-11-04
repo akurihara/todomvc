@@ -1,4 +1,5 @@
 const ADD_TODO = 'todomvc/todos/ADD_TODO';
+const EDIT_TODO = 'todomvc/todos/EDIT_TODO';
 const DELETE_TODO = 'todomvc/todos/DELETE_TODO';
 const COMPLETE_TODO = 'todomvc/todos/COMPLETE_TODO';
 const TOGGLE_ALL = 'todomvc/todos/TOGGLE_ALL';
@@ -18,6 +19,12 @@ export default function reducer(state = initialState, action) {
         text: action.text,
         completed: false  
       }];
+    case EDIT_TODO:
+      return state.map(todo =>
+        todo.id === action.id ?
+          Object.assign({}, todo, { text: action.text }) :
+          todo
+      )
     case DELETE_TODO:
       return state.filter(todo => todo.id !== action.id)
     case COMPLETE_TODO:
@@ -39,6 +46,10 @@ export default function reducer(state = initialState, action) {
 
 export function addTodo(text) {
   return { type: ADD_TODO, text }
+}
+
+export function editTodo(id, text) {
+  return { type: EDIT_TODO, id, text }
 }
 
 export function deleteTodo(id) {

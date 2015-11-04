@@ -50,4 +50,5 @@ MainSection.propTypes = {
     completed: PropTypes.bool.isRequired
   }).isRequired).isRequired
 }
+
 export default MainSection;
